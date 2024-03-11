@@ -1,0 +1,38 @@
+name: API Deployement
+
+on:
+  push:
+    branches: [ "main" ]
+    strategy:
+      matrix:
+        ubuntu: ['ubuntu-22.04']
+        dotnet: ['8.0.0']
+
+jobs: ${{ matrix.ubuntu }}
+
+  steps:
+    - name: Checkout repo
+      uses: actions/checkoutv4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version:  ${{ matrix.dotnet }}
+        cache: true
+    
+    - name: Build Docker image
+      working-directory: SampleAPI/Dockerfile
+      run: dotnet build API-DOTNET
+
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --no-restore
+      
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+#https://medium.com/@kornienko1296/ci-cd-for-net-8-api-with-dotnet-publish-and-github-actions-deploy-to-azure-app-service-container-5b036a1524b0
+  #env:
+   # image: '${{ secrets.DOCKERHUB_USERNAME }}/sample-app }}'
+    
