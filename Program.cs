@@ -1,4 +1,6 @@
 
+using API_DOTNET.Models;
+using API_DOTNET.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_DOTNET
@@ -14,6 +16,10 @@ namespace API_DOTNET
             {
                 options.UseSqlite("Data Source=item.db");
             });
+
+            builder.Services.AddScoped<DbContext, Context>();
+           
+            builder.Services.AddScoped<IRepository<Item>, ItemRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
