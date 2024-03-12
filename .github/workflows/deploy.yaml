@@ -31,10 +31,6 @@ jobs:
         dotnet-version:  ${{ env.DOTNET_VERSION }}
         cache: true
     
-    - name: Build Docker image
-      working-directory: SampleAPI/Dockerfile
-      run: dotnet build API-DOTNET
-
     - name: Restore dependencies
       run: dotnet restore
       
@@ -44,7 +40,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     
-    - name: Create Docker image
+    - name: Build Docker image
       run: dotnet publish ./SampleAPI/API-DOTNET.csproj /t:PublishContainer -r linux-x64
 
     - name: change image tag
