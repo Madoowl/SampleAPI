@@ -3,14 +3,20 @@ name: API Deployement
 on:
   push:
     branches: [ "main" ]
-    strategy:
-      matrix:
-        ubuntu: ['ubuntu-22.04']
-        dotnet: ['8.0.0']
-
+  workflow_dispatch:
+  
+  strategy:
+    matrix:
+      ubuntu: ['ubuntu-22.04']
+      dotnet: ['8.0.0']
+    
+env: 
+  dotnet-image: '${{ secrets.DOCKER_HUB_USERNAME }}/sample-app'
+  
 jobs: ${{ matrix.ubuntu }}
 
   steps:
+  
     - name: Checkout repo
       uses: actions/checkoutv4
 
@@ -35,4 +41,19 @@ jobs: ${{ matrix.ubuntu }}
 #https://medium.com/@kornienko1296/ci-cd-for-net-8-api-with-dotnet-publish-and-github-actions-deploy-to-azure-app-service-container-5b036a1524b0
   #env:
    # image: '${{ secrets.DOCKERHUB_USERNAME }}/sample-app }}'
+    
+  - name: Create Docker image
+    run: dotnet publish ./SampleAPI/API-DOTNET.csproj /t:PublishContainer -r linux-x64
+
+  - name: change image tag
+    run: docker tag wowshop '${{ env.dotnet-image }}'
+
+- name: Login to Docker Hub
+  uses: docker/login-action@v3
+  with:
+    username: ${{ secrets.DOCKER_HUB_USERNAME }}
+    password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+  - name: Push to Docker
+    run: docker push '${{ env.dotnet-image }}'
     
