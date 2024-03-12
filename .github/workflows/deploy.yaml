@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         ubuntu: ['ubuntu-22.04']
-        dotnet: ['8.0.0']
+        dotnet: ['8.0.2']
 
     
     steps:
