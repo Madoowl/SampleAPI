@@ -56,5 +56,5 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Push to Docker
-      run: docker push '${{ env.DOTNET_IMAGE }}'
+      run: docker push 'docker.io/${{ secrets.DOCKERHUB_USERNAME }}/${{ env.DOTNET_IMAGE }}'
     
