@@ -43,8 +43,8 @@ jobs:
     - name: Build Docker image
       run: |
         pwd
-        ls ./SampleAPI/
-        dotnet publish ./SampleAPI/API-DOTNET.csproj /t:PublishContainer -r linux-x64
+        ls
+        dotnet publish ./API-DOTNET.csproj /t:PublishContainer -r linux-x64
 
     - name: change image tag
       run: docker tag wowshop '${{ env.DOTNET_IMAGE }}'
