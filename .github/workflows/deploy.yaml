@@ -64,6 +64,12 @@ jobs:
     #     push: true
     #     tags: '${{ env.DOTNET_IMAGE }}:latest'
     
-    - name: Push to Docker
-      run: docker push madoowl${{ env.DOTNET_IMAGE }}:latest
+    - name: Build and push Docker image
+      run: |
+        docker build -t madoowl${{ env.DOTNET_IMAGE }}:latest .
+        docker push madoowl${{ env.DOTNET_IMAGE }}:latest
+
+
+    # - name: Push to Docker
+    #   run: docker push madoowl${{ env.DOTNET_IMAGE }}:latest
     
