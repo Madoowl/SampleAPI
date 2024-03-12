@@ -64,9 +64,6 @@ jobs:
     #     push: true
     #     tags: '${{ env.DOTNET_IMAGE }}:latest'
     
-    # - name: Push to Docker
-    #   run: docker push 'docker.io
-
     - name: Push to Docker
-      run: docker push ${{ env.DOTNET_IMAGE }}:latest
+      run: docker push ${{ secrets.DOCKERHUB_USERNAME}}/${{ env.DOTNET_IMAGE }}:latest
     
