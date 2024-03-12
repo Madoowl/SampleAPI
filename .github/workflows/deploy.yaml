@@ -55,7 +55,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-
+    
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: true
+        tags: ${{ env.DOTNET_IMAGE }}:latest
+    
     - name: Push to Docker
       run: docker push 'docker.io${{ env.DOTNET_IMAGE }}'
     
