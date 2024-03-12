@@ -65,5 +65,5 @@ jobs:
     #     tags: '${{ env.DOTNET_IMAGE }}:latest'
     
     - name: Push to Docker
-      run: docker push madoowl/${{ env.DOTNET_IMAGE }}:latest
+      run: docker push madoowl${{ env.DOTNET_IMAGE }}:latest
     
