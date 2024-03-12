@@ -7,7 +7,7 @@ on:
     
 env: 
   DOTNET_IMAGE: '${{ secrets.DOCKER_HUB_USERNAME }}/sample-app'
-  DOTNET_TAG: sample-app
+  DOTNET_TAG: latest
   DOTNET_VERSION: 8.0.100
   UBUNTU_VERSION: ubuntu-22.04
 
@@ -62,8 +62,8 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ env.DOTNET_IMAGE }}:latest
+        tags: '${{ env.DOTNET_IMAGE }}:latest'
     
     # - name: Push to Docker
-    #   run: docker push 'docker.io${{ env.DOTNET_IMAGE }}'
+    #   run: docker push 'docker.io
     
