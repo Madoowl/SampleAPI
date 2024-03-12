@@ -40,7 +40,10 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     
     - name: Build Docker image
-      run: dotnet publish ./SampleAPI/API-DOTNET.csproj /t:PublishContainer -r linux-x64
+      run: |
+        echo '$PWD'
+        echo 'ls ./SampleAPI/ '
+        dotnet publish ./SampleAPI/API-DOTNET.csproj /t:PublishContainer -r linux-x64
 
     - name: change image tag
       run: docker tag wowshop '${{ env.dotnet-image }}'
