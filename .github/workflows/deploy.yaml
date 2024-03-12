@@ -47,8 +47,8 @@ jobs:
         ls
         dotnet publish ./API-DOTNET.csproj /t:PublishContainer -r linux-x64
 
-    - name: change image tag
-      run: docker tag sample-app sample-app:latest
+    # - name: change image tag
+    #   run: docker tag sample-app sample-app:latest
 
     - name: Login to Docker Hub
       uses: docker/login-action@v3
@@ -64,6 +64,6 @@ jobs:
         push: true
         tags: ${{ env.DOTNET_IMAGE }}:latest
     
-    - name: Push to Docker
-      run: docker push 'docker.io${{ env.DOTNET_IMAGE }}'
+    # - name: Push to Docker
+    #   run: docker push 'docker.io${{ env.DOTNET_IMAGE }}'
     
