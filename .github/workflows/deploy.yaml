@@ -52,11 +52,20 @@ jobs:
     - name: Login to Docker Hub
       run: docker login -u maadoowl -p ${{ secrets.DOCKERHUB_TOKEN }} docker.io
             
-    - name: Build and push Docker image
-      run: |
-        docker login -u maadoowl -p ${{ secrets.DOCKERHUB_TOKEN }} docker.io
-        docker build -t madoowl${{ env.DOTNET_IMAGE }}:latest .
-        docker push madoowl${{ env.DOTNET_IMAGE }}:latest     
+    # - name: Build and push Docker image
+    #   run: |
+    #     docker login -u maadoowl -p $ {{ secrets.DOCKERHUB_TOKEN }} docker.io
+    #     docker build -t madoowl$ {{ env.DOTNET_IMAGE }}:latest .
+    #     docker push madoowl$ {{ env.DOTNET_IMAGE }}:latest
+        
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v6
+      with:
+        image: ${{ env.DOTNET_IMAGE }}:latest
+        registry: docker.io
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
 
   # build-image :
 
