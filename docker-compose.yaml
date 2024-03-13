@@ -1,7 +1,7 @@
 ﻿version: '1'
 services:
   net-app:
-    image: maadoowl/sample-app:latest
+    image: docker.io/maadoowl/sample-app:main-30f9ba8
     container_name: sample-net-app
     ports:
-      - "80:80"
+      - "85:443"

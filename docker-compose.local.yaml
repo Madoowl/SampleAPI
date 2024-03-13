@@ -1,0 +1,14 @@
+version: '1'
+
+services:
+
+  net-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+      - BUILD_CONFIGURATION=Release
+    container_name: sample-local-net-app
+   
+    ports:
+      - "82:80"
