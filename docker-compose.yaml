@@ -1,0 +1,7 @@
+﻿version: '1'
+services:
+  net-app:
+    image: maadoowl/sample-app:latest
+    container_name: sample-net-app
+    ports:
+      - "80:80"

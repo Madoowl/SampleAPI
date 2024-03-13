@@ -42,6 +42,8 @@ namespace API_DOTNET
 
             app.MapControllers();
 
+            app.MapGet("/", () => "Sample API is responding ...");
+
             app.Run();
         }
     }
